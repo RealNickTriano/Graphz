@@ -48,7 +48,7 @@ const BarGraph = ({
 
   useEffect(() => {
     setGraphHeight(graph.current.offsetHeight);
-  }, [graph]);
+  }, [graph, yInterval, maxY]);
 
   return (
     <div className="bg-slate-700 rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[50%] shadow-md transition-all">
