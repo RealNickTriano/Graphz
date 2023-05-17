@@ -14,28 +14,9 @@ const BarGraph = ({
   const [graphHeight, setGraphHeight] = useState(0);
 
   const heightOfYLabel = 20;
-  const maxYValue = 8;
   const negativeHeightOfXLabel = -28;
   const thicknessOfLines = 1;
-
-  const barValues = [
-    {
-      name: "January",
-      value: 4,
-    },
-    {
-      name: "Feburary",
-      value: 0,
-    },
-    {
-      name: "March",
-      value: 5,
-    },
-    {
-      name: "April",
-      value: 2,
-    },
-  ];
+  const widthOfBar = 64;
 
   const createIntervals = () => {
     var intervals = [];
@@ -51,7 +32,10 @@ const BarGraph = ({
   }, [graph, yInterval, maxY]);
 
   return (
-    <div className="bg-slate-700 rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[50%] shadow-md transition-all">
+    <div
+      style={{ width: (widthOfBar + 40) * xValues.length }}
+      className="bg-slate-700 rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[50%] shadow-md transition-all"
+    >
       <div className="flex flex-col">
         <h1 className="text-white font-semibold">{title}</h1>
         <h2 className="text-gray-500">{description}</h2>
@@ -61,7 +45,7 @@ const BarGraph = ({
         {/* Graph */}
         <div
           ref={graph}
-          className="text-gray-500 flex flex-col gap-12 text-sm relative"
+          className="text-gray-500 flex flex-col gap-6 text-sm relative"
         >
           {createIntervals().map((item) => {
             return (
@@ -78,9 +62,9 @@ const BarGraph = ({
           {/* Bars */}
           <div
             style={{ bottom: negativeHeightOfXLabel }}
-            className="absolute flex justify-around items-end w-full"
+            className="absolute flex justify-around items-end w-full px-2"
           >
-            {barValues.map((item) => {
+            {xValues.map((item) => {
               return (
                 <div className="flex flex-col gap-2 text-gray-300 text-center">
                   <div
@@ -93,7 +77,7 @@ const BarGraph = ({
                     }}
                     className="bg-blue-500 rounded-sm w-16"
                   ></div>
-                  <h1 className="">{item.name}</h1>
+                  <h1 className="">{item.label}</h1>
                 </div>
               );
             })}

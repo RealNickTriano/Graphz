@@ -8,8 +8,8 @@ export default function Home() {
         title={"Sales Pipeline Overview"}
         description={"Insights into this month's sales"}
         subTitle={"Deals by month"}
-        maxY={8}
-        yInterval={1}
+        maxY={50}
+        yInterval={10}
         xValues={[
           {
             label: "January",
