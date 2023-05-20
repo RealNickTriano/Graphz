@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Bar from "@/components/Bar";
 
 const BarGraph = ({
   title,
   description,
   subTitle,
+  barColor,
   maxY,
   yInterval,
   xValues,
@@ -34,7 +36,7 @@ const BarGraph = ({
   return (
     <div
       style={{ width: (widthOfBar + 40) * xValues.length }}
-      className="bg-slate-700 rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[50%] shadow-md transition-all"
+      className="bg-slate-700 rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[100%] shadow-md transition-all"
     >
       <div className="flex flex-col">
         <h1 className="text-white font-semibold">{title}</h1>
@@ -47,9 +49,9 @@ const BarGraph = ({
           ref={graph}
           className="text-gray-500 flex flex-col gap-6 text-sm relative"
         >
-          {createIntervals().map((item) => {
+          {createIntervals().map((item, index) => {
             return (
-              <div>
+              <div key={index}>
                 <div>{item}</div>
                 <div
                   style={{ height: thicknessOfLines }}
@@ -62,23 +64,20 @@ const BarGraph = ({
           {/* Bars */}
           <div
             style={{ bottom: negativeHeightOfXLabel }}
-            className="absolute flex justify-around items-end w-full px-2"
+            className="absolute flex justify-center gap-12 items-end w-full px-2"
           >
-            {xValues.map((item) => {
+            {xValues.map((item, index) => {
               return (
-                <div className="flex flex-col gap-2 text-gray-300 text-center">
-                  <div
-                    style={{
-                      height:
-                        item.value === 0
-                          ? thicknessOfLines
-                          : ((graphHeight - heightOfYLabel) / maxY) *
-                            item.value,
-                    }}
-                    className="bg-blue-500 rounded-sm w-16"
-                  ></div>
-                  <h1 className="">{item.label}</h1>
-                </div>
+                <Bar
+                  key={index}
+                  value={item.value}
+                  label={item.label}
+                  maxY={maxY}
+                  barColor={barColor}
+                  heightOfYLabel={heightOfYLabel}
+                  graphHeight={graphHeight}
+                  thicknessOfLines={thicknessOfLines}
+                ></Bar>
               );
             })}
           </div>
