@@ -55,11 +55,6 @@ export default function Home() {
         ></BarOptions>
       </div>
 
-      <ColorPicker
-        selectedColor={barColor}
-        setSelectedColor={setBarColor}
-      ></ColorPicker>
-
       {/* <LineGraph
         title={"Sales Pipeline Overview"}
         description={"Insights into this month's sales"}

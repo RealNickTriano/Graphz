@@ -1,4 +1,5 @@
 import React from "react";
+import ColorPicker from "@/components/ColorPicker";
 
 const BarOptions = ({
   barColor,
@@ -16,13 +17,10 @@ const BarOptions = ({
 
       <div className="flex flex-col justify-center items-start gap-1">
         <label htmlFor="color">Color</label>
-        <input
-          type="text"
-          name="color"
-          className="w-32 outline-none rounded-lg shadow-md px-2 py-1"
-          value={barColor}
-          onChange={(e) => setBarColor(e.target.value)}
-        />
+        <ColorPicker
+          selectedColor={barColor}
+          setSelectedColor={setBarColor}
+        ></ColorPicker>
       </div>
 
       <div className="flex flex-col justify-center items-start gap-1">
