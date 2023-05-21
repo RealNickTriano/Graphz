@@ -291,6 +291,7 @@ const ColorPicker = ({ selectedColor, setSelectedColor }) => {
   };
 
   const [showExtra, setShowExtra] = useState("none");
+  const [selectedName, setSelectedName] = useState("none");
   // const [selectedColor, setSelectedColor] = useState("#64748b");
 
   const handleClick = (e, name) => {
@@ -322,7 +323,10 @@ const ColorPicker = ({ selectedColor, setSelectedColor }) => {
               className="w-6 h-6 rounded-full border-2 border-white shadow-md"
               style={{
                 backgroundColor: shades[5],
-                borderColor: showExtra === name && "black",
+                borderColor:
+                  showExtra === name || selectedName === name
+                    ? "black"
+                    : "white",
               }}
             ></button>
             {showExtra === name && (
@@ -331,7 +335,10 @@ const ColorPicker = ({ selectedColor, setSelectedColor }) => {
                   return (
                     <button
                       key={idx}
-                      onClick={(e) => setSelectedColor(item)}
+                      onClick={(e) => {
+                        setSelectedColor(item);
+                        setSelectedName(name);
+                      }}
                       className="w-6 h-6 rounded-full border-2 border-gray-200 shadow-md hover:border-black"
                       style={{
                         backgroundColor: item,

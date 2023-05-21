@@ -8,6 +8,11 @@ const BarGraph = ({
   description,
   subTitle,
   barColor,
+  barWidth,
+  barGap,
+  barPlacement,
+  bgMain,
+  bgForeground,
   maxY,
   yInterval,
   xValues,
@@ -35,14 +40,20 @@ const BarGraph = ({
 
   return (
     <div
-      style={{ width: (widthOfBar + 40) * xValues.length }}
-      className="bg-slate-700 rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[100%] shadow-md transition-all"
+      style={{
+        width: (widthOfBar + 40) * xValues.length,
+        backgroundColor: bgMain,
+      }}
+      className="rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[100%] shadow-md transition-all"
     >
       <div className="flex flex-col">
         <h1 className="text-white font-semibold">{title}</h1>
         <h2 className="text-gray-500">{description}</h2>
       </div>
-      <div className="border-[1px] border-gray-500 rounded-lg p-2 shadow-md flex flex-col gap-6 pb-12 px-4">
+      <div
+        style={{ backgroundColor: bgForeground }}
+        className="border-[1px] border-gray-500 rounded-lg p-2 shadow-md flex flex-col gap-6 pb-12 px-4"
+      >
         <h2 className="text-white">{subTitle}</h2>
         {/* Graph */}
         <div
@@ -63,8 +74,12 @@ const BarGraph = ({
 
           {/* Bars */}
           <div
-            style={{ bottom: negativeHeightOfXLabel }}
-            className="absolute flex justify-center gap-12 items-end w-full px-2"
+            style={{
+              bottom: negativeHeightOfXLabel,
+              gap: barGap + "rem",
+              justifyContent: barPlacement,
+            }}
+            className="absolute flex items-end w-full px-4"
           >
             {xValues.map((item, index) => {
               return (
@@ -74,6 +89,7 @@ const BarGraph = ({
                   label={item.label}
                   maxY={maxY}
                   barColor={barColor}
+                  barWidth={barWidth}
                   heightOfYLabel={heightOfYLabel}
                   graphHeight={graphHeight}
                   thicknessOfLines={thicknessOfLines}

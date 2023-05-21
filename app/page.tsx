@@ -5,10 +5,12 @@ import ColorPicker from "@/components/ColorPicker";
 import { useState } from "react";
 
 export default function Home() {
-  const [barColor, setBarColor] = useState("#292524");
-  const [barWidth, setBarWidth] = useState("16");
-  const [barGap, setBarGap] = useState("12");
+  const [barColor, setBarColor] = useState("#3b82f6");
+  const [barWidth, setBarWidth] = useState("4");
+  const [barGap, setBarGap] = useState("3");
   const [barPlacement, setBarPlacement] = useState("center");
+  const [bgMain, setBgMain] = useState("#334155");
+  const [bgForeground, setBgForeground] = useState("#334155");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-24">
@@ -21,6 +23,11 @@ export default function Home() {
           title={"Sales Pipeline Overview"}
           description={"Insights into this month's sales"}
           barColor={barColor}
+          barWidth={barWidth}
+          barGap={barGap}
+          barPlacement={barPlacement}
+          bgMain={bgMain}
+          bgForeground={bgForeground}
           subTitle={"Deals by month"}
           maxY={8}
           yInterval={2}
@@ -48,10 +55,14 @@ export default function Home() {
           barWidth={barWidth}
           barGap={barGap}
           barPlacement={barPlacement}
+          bgMain={bgMain}
+          bgForeground={bgForeground}
           setBarColor={setBarColor}
           setBarWidth={setBarWidth}
           setBarGap={setBarGap}
           setBarPlacement={setBarPlacement}
+          setBgMain={setBgMain}
+          setBgForeground={setBgForeground}
         ></BarOptions>
       </div>
 

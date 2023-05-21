@@ -6,10 +6,14 @@ const BarOptions = ({
   barWidth,
   barGap,
   barPlacement,
+  bgMain,
+  bgForeground,
   setBarColor,
   setBarWidth,
   setBarGap,
   setBarPlacement,
+  setBgMain,
+  setBgForeground,
 }) => {
   return (
     <div className="flex flex-col justify-center items-start gap-6">
@@ -54,6 +58,22 @@ const BarOptions = ({
           value={barPlacement}
           onChange={(e) => setBarPlacement(e.target.value)}
         />
+      </div>
+
+      <div className="flex flex-col justify-center items-start gap-1">
+        <label htmlFor="color">Background</label>
+        <ColorPicker
+          selectedColor={bgMain}
+          setSelectedColor={setBgMain}
+        ></ColorPicker>
+      </div>
+
+      <div className="flex flex-col justify-center items-start gap-1">
+        <label htmlFor="color">Foreground</label>
+        <ColorPicker
+          selectedColor={bgForeground}
+          setSelectedColor={setBgForeground}
+        ></ColorPicker>
       </div>
     </div>
   );

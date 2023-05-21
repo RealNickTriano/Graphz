@@ -5,6 +5,7 @@ const Bar = ({
   value,
   label,
   barColor,
+  barWidth,
   heightOfYLabel,
   graphHeight,
   thicknessOfLines,
@@ -23,8 +24,9 @@ const Bar = ({
               ? thicknessOfLines
               : ((graphHeight - heightOfYLabel) / maxY) * value,
           backgroundColor: barColor,
+          width: barWidth + "rem",
         }}
-        className={"rounded-sm w-16"}
+        className={"rounded-sm"}
       ></div>
       <h1 className="">{label}</h1>
     </div>
