@@ -11,24 +11,33 @@ export default function Home() {
   const [barPlacement, setBarPlacement] = useState("center");
   const [bgMain, setBgMain] = useState("#334155");
   const [bgForeground, setBgForeground] = useState("#334155");
+  const [linesColor, setLinesColor] = useState("#6b7280");
+  const [textColor, setTextColor] = useState(false);
+  const [title, setTitle] = useState("Sales Pipeline Overview");
+  const [description, setDescription] = useState(
+    "Insights into this month's sales"
+  );
+  const [subTitle, setSubTitle] = useState("Deals by month");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-24">
       <h1 className="text-8xl text-transparent font-bold from-slate-950 to-slate-400 bg-gradient-to-r bg-clip-text py-2">
         graphz.
       </h1>
-      <div className="flex justify-center gap-12 items-center w-[50%]">
+      <div className="flex flex-col justify-center gap-12 items-center">
         {/* yInterval needs to match maxY i.e maxY % yInterval === 0 */}
         <BarGraph
-          title={"Sales Pipeline Overview"}
-          description={"Insights into this month's sales"}
+          title={title}
+          description={description}
+          subTitle={subTitle}
           barColor={barColor}
           barWidth={barWidth}
           barGap={barGap}
+          linesColor={linesColor}
+          textColor={textColor}
           barPlacement={barPlacement}
           bgMain={bgMain}
           bgForeground={bgForeground}
-          subTitle={"Deals by month"}
           maxY={8}
           yInterval={2}
           xValues={[
@@ -57,12 +66,21 @@ export default function Home() {
           barPlacement={barPlacement}
           bgMain={bgMain}
           bgForeground={bgForeground}
+          linesColor={linesColor}
+          title={title}
+          description={description}
+          subTitle={subTitle}
+          setTitle={setTitle}
+          setDescription={setDescription}
+          setSubTitle={setSubTitle}
           setBarColor={setBarColor}
           setBarWidth={setBarWidth}
           setBarGap={setBarGap}
           setBarPlacement={setBarPlacement}
           setBgMain={setBgMain}
           setBgForeground={setBgForeground}
+          setLinesColor={setLinesColor}
+          setTextColor={setTextColor}
         ></BarOptions>
       </div>
 

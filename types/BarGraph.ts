@@ -10,7 +10,9 @@ type BarGraph = {
   barColor: string;
   barWidth: string;
   barGap: string;
+  textColor: boolean;
   barPlacement: string;
+  linesColor: string;
   bgMain: string;
   bgForeground: string;
   maxY: number;

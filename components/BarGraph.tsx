@@ -11,14 +11,18 @@ const BarGraph = ({
   barWidth,
   barGap,
   barPlacement,
+  linesColor,
+  textColor,
   bgMain,
   bgForeground,
   maxY,
   yInterval,
   xValues,
 }: BarGraph) => {
-  const graph = useRef();
+  const graph = useRef<HTMLDivElement>();
+  const barHolder = useRef<HTMLDivElement>();
   const [graphHeight, setGraphHeight] = useState(0);
+  const [graphWidth, setGraphWidth] = useState(0);
 
   const heightOfYLabel = 20;
   const negativeHeightOfXLabel = -28;
@@ -35,38 +39,84 @@ const BarGraph = ({
   };
 
   useEffect(() => {
-    setGraphHeight(graph.current.offsetHeight);
+    const graphEle = graph.current;
+    if (!graphEle) {
+      setGraphHeight(350);
+    } else {
+      setGraphHeight(graphEle.offsetHeight);
+    }
   }, [graph, yInterval, maxY]);
+
+  useEffect(() => {
+    const barHolderEle = barHolder.current;
+    if (!barHolderEle) {
+      setGraphWidth(450);
+    } else {
+      setGraphWidth(barHolderEle.offsetWidth);
+    }
+  }, [barWidth, barGap, xValues]);
+
+  const convertRemToPixels = (rem) => {
+    return (
+      rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
+    );
+  };
 
   return (
     <div
       style={{
-        width: (widthOfBar + 40) * xValues.length,
+        // // Convert rem to px and compute width of graph
+        // width:
+        //   (convertRemToPixels(Number(barWidth)) +
+        //     convertRemToPixels(Number(barGap))) *
+        //   xValues.length,
         backgroundColor: bgMain,
       }}
-      className="rounded-xl px-8 py-6 flex flex-col gap-6 min-w-[100%] shadow-md transition-all"
+      className="rounded-xl px-8 py-6 flex flex-col gap-6 shadow-md transition-all justify-center items-center"
     >
-      <div className="flex flex-col">
-        <h1 className="text-white font-semibold">{title}</h1>
-        <h2 className="text-gray-500">{description}</h2>
+      <div className="flex flex-col justify-center items-center">
+        <h1
+          style={{ color: !textColor ? "white" : "black" }}
+          className="font-semibold"
+        >
+          {title}
+        </h1>
+        <h2 style={{ color: !textColor ? "#6b7280" : "#374151" }} className="">
+          {description}
+        </h2>
       </div>
       <div
-        style={{ backgroundColor: bgForeground }}
+        style={{
+          // Convert rem to px and compute width of graph
+          width: graphWidth + 24,
+          // (convertRemToPixels(Number(barWidth)) +
+          //   convertRemToPixels(Number(barGap))) *
+          //   xValues.length +
+          // 64,
+          backgroundColor: bgForeground,
+          borderColor: linesColor,
+        }}
         className="border-[1px] border-gray-500 rounded-lg p-2 shadow-md flex flex-col gap-6 pb-12 px-4"
       >
-        <h2 className="text-white">{subTitle}</h2>
+        <h2 style={{ color: !textColor ? "white" : "black" }} className="">
+          {subTitle}
+        </h2>
         {/* Graph */}
         <div
           ref={graph}
-          className="text-gray-500 flex flex-col gap-6 text-sm relative"
+          style={{ color: linesColor }}
+          className="flex flex-col gap-6 text-sm relative"
         >
           {createIntervals().map((item, index) => {
             return (
               <div key={index}>
                 <div>{item}</div>
                 <div
-                  style={{ height: thicknessOfLines }}
-                  className="w-full bg-gray-500"
+                  style={{
+                    height: thicknessOfLines,
+                    backgroundColor: linesColor,
+                  }}
+                  className="w-full"
                 ></div>
               </div>
             );
@@ -74,12 +124,13 @@ const BarGraph = ({
 
           {/* Bars */}
           <div
+            ref={barHolder}
             style={{
               bottom: negativeHeightOfXLabel,
               gap: barGap + "rem",
               justifyContent: barPlacement,
             }}
-            className="absolute flex items-end w-full px-4"
+            className="absolute flex items-end px-4"
           >
             {xValues.map((item, index) => {
               return (
@@ -89,6 +140,7 @@ const BarGraph = ({
                   label={item.label}
                   maxY={maxY}
                   barColor={barColor}
+                  textColor={textColor}
                   barWidth={barWidth}
                   heightOfYLabel={heightOfYLabel}
                   graphHeight={graphHeight}

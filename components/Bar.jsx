@@ -5,6 +5,7 @@ const Bar = ({
   value,
   label,
   barColor,
+  textColor,
   barWidth,
   heightOfYLabel,
   graphHeight,
@@ -15,7 +16,7 @@ const Bar = ({
   return (
     <div
       onClick={() => console.log(label)}
-      className="flex flex-col gap-2 text-gray-300 text-center hover:cursor-pointer"
+      className="flex flex-col gap-2 text-gray-300 text-center hover:cursor-pointer justify-center items-center"
     >
       <div
         style={{
@@ -28,7 +29,9 @@ const Bar = ({
         }}
         className={"rounded-sm"}
       ></div>
-      <h1 className="">{label}</h1>
+      <h1 style={{ color: !textColor ? "#6b7280" : "#374151" }} className="">
+        {label}
+      </h1>
     </div>
   );
 };
