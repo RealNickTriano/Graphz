@@ -29,7 +29,10 @@ const Bar = ({
         }}
         className={"rounded-sm"}
       ></div>
-      <h1 style={{ color: !textColor ? "#6b7280" : "#374151" }} className="">
+      <h1
+        style={{ color: !textColor ? "#6b7280" : "#374151" }}
+        className="whitespace-nowrap"
+      >
         {label}
       </h1>
     </div>

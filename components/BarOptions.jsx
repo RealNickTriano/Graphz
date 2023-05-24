@@ -1,5 +1,6 @@
 import React from "react";
 import ColorPicker from "@/components/ColorPicker";
+import BarDataInput from "@/components/BarDataInput";
 import Slider from "@mui/material/Slider";
 import { Switch } from "@mui/material";
 
@@ -26,6 +27,8 @@ const BarOptions = ({
   setBgForeground,
   setLinesColor,
   setTextColor,
+  barData,
+  setBarData,
 }) => {
   return (
     <div className="grid grid-cols-4 justify-center items-start gap-6">
@@ -142,6 +145,8 @@ const BarOptions = ({
           setSelectedColor={setLinesColor}
         ></ColorPicker>
       </div>
+
+      <BarDataInput barData={barData} setBarData={setBarData} />
     </div>
   );
 };

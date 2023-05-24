@@ -1,6 +1,7 @@
 type BarType = {
+  id: number;
   label: string;
-  value: number;
+  data: number;
 };
 
 type BarGraph = {

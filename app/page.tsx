@@ -18,6 +18,28 @@ export default function Home() {
     "Insights into this month's sales"
   );
   const [subTitle, setSubTitle] = useState("Deals by month");
+  const [barData, setBarData] = useState([
+    {
+      id: 0,
+      label: "January",
+      data: 4,
+    },
+    {
+      id: 1,
+      label: "Feburary",
+      data: 0,
+    },
+    {
+      id: 2,
+      label: "March",
+      data: 5,
+    },
+    {
+      id: 3,
+      label: "April",
+      data: 2,
+    },
+  ]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-24">
@@ -40,29 +62,13 @@ export default function Home() {
           bgForeground={bgForeground}
           maxY={8}
           yInterval={2}
-          xValues={[
-            {
-              label: "January",
-              value: 4,
-            },
-            {
-              label: "Feburary",
-              value: 0,
-            },
-            {
-              label: "March",
-              value: 5,
-            },
-            {
-              label: "April",
-              value: 2,
-            },
-          ]}
+          xValues={barData}
         />
         <BarOptions
           barColor={barColor}
           barWidth={barWidth}
           barGap={barGap}
+          barData={barData}
           barPlacement={barPlacement}
           bgMain={bgMain}
           bgForeground={bgForeground}
@@ -81,6 +87,7 @@ export default function Home() {
           setBgForeground={setBgForeground}
           setLinesColor={setLinesColor}
           setTextColor={setTextColor}
+          setBarData={setBarData}
         ></BarOptions>
       </div>
 

@@ -136,7 +136,7 @@ const BarGraph = ({
               return (
                 <Bar
                   key={index}
-                  value={item.value}
+                  value={item.data}
                   label={item.label}
                   maxY={maxY}
                   barColor={barColor}
