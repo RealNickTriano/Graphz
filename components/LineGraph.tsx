@@ -11,7 +11,7 @@ const LineGraph = ({
   yInterval,
   xValues = [],
 }: BarGraph) => {
-  const graph = useRef();
+  const graph = useRef<HTMLDivElement>();
   const [graphHeight, setGraphHeight] = useState(0);
 
   const heightOfYLabel = 20;
@@ -28,7 +28,7 @@ const LineGraph = ({
     return intervals.reverse();
   };
 
-  const canvas = useRef();
+  const canvas = useRef<HTMLCanvasElement>();
   let ctx = null;
 
   useEffect(() => {
@@ -46,23 +46,24 @@ const LineGraph = ({
     xValues.forEach((item, index) => {
       drawLine({
         x: 50 * (index + 1),
-        y: 196 - (((graphHeight - heightOfYLabel) / maxY) * item.value - 4),
+        y: 196 - (((graphHeight - heightOfYLabel) / maxY) * item.data - 4),
         x1: 50 * (index + 2),
         y1:
           index !== xValues.length - 1
             ? 196 -
               (((graphHeight - heightOfYLabel) / maxY) *
-                xValues[index + 1].value -
+                xValues[index + 1].data -
                 4)
-            : 196 - (((graphHeight - heightOfYLabel) / maxY) * item.value - 4),
+            : 196 - (((graphHeight - heightOfYLabel) / maxY) * item.data - 4),
       });
     });
   }, []);
 
   // draw a line
-  const drawLine = (info, style = {}) => {
+  const drawLine = (info) => {
     const { x, y, x1, y1 } = info;
-    const { color = "#3b82f6", width = 4 } = style;
+    const color = "#3b82f6";
+    const width = 4;
 
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -111,10 +112,10 @@ const LineGraph = ({
                   <div
                     style={{
                       marginBottom:
-                        item.value === 0
+                        item.data === 0
                           ? thicknessOfLines
                           : ((graphHeight - heightOfYLabel) / maxY) *
-                              item.value -
+                              item.data -
                             4,
                     }}
                     className="bg-blue-500 rounded-full w-2 h-2"

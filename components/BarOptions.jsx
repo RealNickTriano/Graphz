@@ -12,7 +12,7 @@ const BarOptions = ({
   bgMain,
   bgForeground,
   linesColor,
-  textColor,
+  //textColor,
   title,
   setTitle,
   description,

@@ -42,11 +42,15 @@ export default function Home() {
   ]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-24">
-      <h1 className="text-8xl text-transparent font-bold from-slate-950 to-slate-400 bg-gradient-to-r bg-clip-text py-2">
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-6">
+      <h1 className="text-8xl text-transparent font-bold from-slate-950 to-slate-500 bg-gradient-to-r bg-clip-text py-2">
         graphz.
       </h1>
-      <div className="flex flex-col justify-center gap-12 items-center">
+      <h2 className="text-2xl font-bold py-2">
+        {" "}
+        Data Made Simple and Beautiful.
+      </h2>
+      <div className="flex flex-col justify-center gap-12 items-center mt-32">
         {/* yInterval needs to match maxY i.e maxY % yInterval === 0 */}
         <BarGraph
           title={title}
@@ -90,7 +94,6 @@ export default function Home() {
           setBarData={setBarData}
         ></BarOptions>
       </div>
-
       {/* <LineGraph
         title={"Sales Pipeline Overview"}
         description={"Insights into this month's sales"}
