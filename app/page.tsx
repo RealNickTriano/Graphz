@@ -1,8 +1,11 @@
 "use client";
+import "@uploadthing/react/styles.css";
 import BarGraph from "@/components/BarGraph";
 import BarOptions from "@/components/BarOptions";
 import ColorPicker from "@/components/ColorPicker";
+import FileUpload from "@/components/FileUpload";
 import { useState } from "react";
+import { table } from "console";
 
 export default function Home() {
   const [barColor, setBarColor] = useState("#3b82f6");
@@ -41,6 +44,8 @@ export default function Home() {
     },
   ]);
 
+  const [CSVContent, setCSVContent] = useState({});
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-6">
       <h1 className="text-8xl text-transparent font-bold from-slate-950 to-slate-500 bg-gradient-to-r bg-clip-text py-2">
@@ -50,6 +55,22 @@ export default function Home() {
         {" "}
         Data Made Simple and Beautiful.
       </h2>
+      <FileUpload setContents={setCSVContent} />
+      <div className="flex justify-center items-center gap-6">
+        {Object.entries(CSVContent).map(([header, values], index) => {
+          return (
+            <div
+              key={index}
+              className="flex flex-col justify-center items-start"
+            >
+              <h1 className="font-bold">{header}</h1>
+              {values.map((item, index) => {
+                return <h2 key={index}>{item}</h2>;
+              })}
+            </div>
+          );
+        })}
+      </div>
       <div className="flex flex-col justify-center gap-12 items-center mt-32">
         {/* yInterval needs to match maxY i.e maxY % yInterval === 0 */}
         <BarGraph
