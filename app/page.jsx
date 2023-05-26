@@ -5,7 +5,6 @@ import BarOptions from "@/components/BarOptions";
 import ColorPicker from "@/components/ColorPicker";
 import FileUpload from "@/components/FileUpload";
 import { useState } from "react";
-import { table } from "console";
 
 export default function Home() {
   const [barColor, setBarColor] = useState("#3b82f6");
@@ -43,6 +42,9 @@ export default function Home() {
       data: 2,
     },
   ]);
+  const [maxY, setMaxY] = useState(8);
+  const [minY, setMinY] = useState(0);
+  const [yInterval, setYInterval] = useState(2);
 
   const [CSVContent, setCSVContent] = useState({});
 
@@ -70,11 +72,21 @@ export default function Home() {
           barPlacement={barPlacement}
           bgMain={bgMain}
           bgForeground={bgForeground}
-          maxY={8}
-          yInterval={2}
+          maxY={maxY}
+          minY={minY}
+          yInterval={yInterval}
           xValues={barData}
+          setMaxY={setMaxY}
+          setMinY={setMinY}
+          setYInterval={setYInterval}
         />
-        <FileUpload setContents={setCSVContent} />
+        <FileUpload
+          setMaxY={setMaxY}
+          setMinY={setMinY}
+          setYInterval={setYInterval}
+          setContents={setCSVContent}
+          setFormattedData={setBarData}
+        />
         <div className="flex justify-center items-center gap-1">
           {Object.entries(CSVContent).map(([header, values], index) => {
             return (

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-const FileUpload = ({ setContents }) => {
+const FileUpload = ({
+  setContents,
+  setFormattedData,
+  setMaxY,
+  setMinY,
+  setYInterval,
+}) => {
   const [file, setFile] = useState();
   const [fileSize, setFileSize] = useState("0 B");
   const [fileName, setFileName] = useState(" ");
@@ -68,7 +74,37 @@ const FileUpload = ({ setContents }) => {
 
       reader.onload = (evt) => {
         console.log(evt.target.result);
-        setContents(parseCSV(evt.target.result));
+        const res = parseCSV(evt.target.result);
+        setContents(res);
+        console.log(res);
+
+        const keys = Object.keys(res);
+        // grab the headers
+        const header1 = keys[0];
+        const header2 = keys[1];
+
+        const values = Object.values(res);
+        // grab the data
+        const dataCol1 = values[0];
+        const dataCol2 = values[1];
+
+        // create Bar obj for each
+        const barData = [];
+        dataCol1.forEach((item, index) =>
+          barData.push({
+            id: Date.now(),
+            label: item,
+            data: dataCol2[index],
+          })
+        );
+        setFormattedData(barData);
+        const minY = Math.min(...barData.map((item) => item.data));
+        const maxY = Math.max(...barData.map((item) => item.data));
+        const yInterval = Math.floor((maxY - minY) / 10);
+
+        setMaxY(maxY);
+        setMinY(minY);
+        setYInterval(yInterval);
       };
 
       reader.readAsText(myFile);

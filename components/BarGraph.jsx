@@ -17,10 +17,14 @@ const BarGraph = ({
   bgForeground,
   maxY,
   yInterval,
+  minY,
+  setMaxY,
+  setMinY,
+  setYInterval,
   xValues,
-}: BarGraph) => {
-  const graph = useRef<HTMLDivElement>();
-  const barHolder = useRef<HTMLDivElement>();
+}) => {
+  const graph = useRef();
+  const barHolder = useRef();
   const [graphHeight, setGraphHeight] = useState(0);
   const [graphWidth, setGraphWidth] = useState(0);
 
@@ -31,7 +35,7 @@ const BarGraph = ({
 
   const createIntervals = () => {
     var intervals = [];
-    for (var i = 0; i <= maxY; i += yInterval) {
+    for (var i = minY; i <= maxY; i += yInterval) {
       intervals.push(i);
     }
 

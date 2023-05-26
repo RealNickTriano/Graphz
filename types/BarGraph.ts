@@ -19,4 +19,8 @@ type BarGraph = {
   maxY: number;
   yInterval: number;
   xValues: BarType[];
+  minY: number;
+  setMaxY: number;
+  setMinY: number;
+  setYInterval: number;
 };
