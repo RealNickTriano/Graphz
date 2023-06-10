@@ -5,6 +5,8 @@ import BarOptions from "@/components/BarOptions";
 import ColorPicker from "@/components/ColorPicker";
 import FileUpload from "@/components/FileUpload";
 import { useState } from "react";
+import Toolbar from "@/components/Toolbar";
+import ColorBar from "@/components/ColorBar";
 
 export default function Home() {
   const [barColor, setBarColor] = useState("#3b82f6");
@@ -57,6 +59,7 @@ export default function Home() {
         {" "}
         Data Made Simple and Beautiful.
       </h2>
+      <Toolbar bgMain={bgMain} setBgMain={setBgMain} />
 
       <div className="flex flex-col justify-center gap-12 items-center">
         {/* yInterval needs to match maxY i.e maxY % yInterval === 0 */}

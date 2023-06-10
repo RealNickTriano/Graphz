@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/BarOptions.jsx",
-    "components/BarGraph.jsx"
+    "components/BarGraph.jsx",
+    "app/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
