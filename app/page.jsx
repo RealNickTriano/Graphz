@@ -7,6 +7,10 @@ import FileUpload from "@/components/FileUpload";
 import { useState } from "react";
 import Toolbar from "@/components/Toolbar";
 import ColorBar from "@/components/ColorBar";
+import { BsBarChartFill, BsBarChartLineFill } from "react-icons/bs";
+import { BiLineChart, BiScatterChart } from "react-icons/bi";
+import { FaChartPie } from "react-icons/fa";
+import { FcComboChart } from "react-icons/fc";
 
 export default function Home() {
   const [barColor, setBarColor] = useState("#3b82f6");
@@ -50,6 +54,11 @@ export default function Home() {
 
   const [CSVContent, setCSVContent] = useState({});
 
+  const [graphType, setGraphType] = useState({
+    name: "Bar",
+    icon: <BsBarChartFill />,
+  });
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6">
       <h1 className="text-8xl text-transparent font-bold from-slate-950 to-slate-500 bg-gradient-to-r bg-clip-text py-2">
@@ -59,7 +68,21 @@ export default function Home() {
         {" "}
         Data Made Simple and Beautiful.
       </h2>
-      <Toolbar bgMain={bgMain} setBgMain={setBgMain} />
+      <Toolbar
+        bgMain={bgMain}
+        setBgMain={setBgMain}
+        bgForeground={bgForeground}
+        setBgForeground={setBgForeground}
+        barColor={barColor}
+        setBarColor={setBarColor}
+        linesColor={linesColor}
+        setLinesColor={setLinesColor}
+        setBarWidth={setBarWidth}
+        setBarGap={setBarGap}
+        setTextColor={setTextColor}
+        setGraphType={setGraphType}
+        graphType={graphType}
+      />
 
       <div className="flex flex-col justify-center gap-12 items-center">
         {/* yInterval needs to match maxY i.e maxY % yInterval === 0 */}
@@ -114,7 +137,7 @@ export default function Home() {
             );
           })}
         </div>
-        <BarOptions
+        {/* <BarOptions
           barColor={barColor}
           barWidth={barWidth}
           barGap={barGap}
@@ -138,7 +161,7 @@ export default function Home() {
           setLinesColor={setLinesColor}
           setTextColor={setTextColor}
           setBarData={setBarData}
-        ></BarOptions>
+        ></BarOptions> */}
       </div>
       {/* <LineGraph
         title={"Sales Pipeline Overview"}

@@ -4,7 +4,7 @@ import { BsBarChartFill } from "react-icons/bs";
 import { BiLineChart, BiScatterChart } from "react-icons/bi";
 import ColorBar from "@/components/ColorBar";
 
-const ColorDropDown = ({ currentColor, setCurrentColor }) => {
+const ColorDropDown = ({ currentColor, setCurrentColor, title }) => {
   const [showDrop, setShowDrop] = useState(false);
   const [showShades, setShowShades] = useState(false);
   const [shade, setShade] = useState("slate");
@@ -308,7 +308,7 @@ const ColorDropDown = ({ currentColor, setCurrentColor }) => {
           setShowShades(false);
         }}
       >
-        Background
+        {title}
         <div className="w-12">
           <ColorBar color={currentColor} />
         </div>
